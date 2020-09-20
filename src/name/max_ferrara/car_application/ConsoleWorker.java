@@ -9,6 +9,10 @@ public class ConsoleWorker {
     private final int currentYear;
 
     public ConsoleWorker(int currentYear, CarManager carManager) {
+        if (currentYear <= 0) {
+            throw new IllegalArgumentException("year can not be <= 0");
+        }
+
         this.carManager = carManager;
         this.currentYear = currentYear;
     }
@@ -19,11 +23,11 @@ public class ConsoleWorker {
 
         do {
             printShortCarInformation();
-            System.out.println("command hint: ");
+            System.out.println("COMMANDS HINT: ");
             System.out.println("add - add new car*");
             System.out.println("delete - delete car by Id*");
             System.out.println("show - change car by Id*");
-            System.out.println("for close application input exit");
+            System.out.println("for close application enter exit");
             System.out.println("enter you command: ");
             command = scanner.nextLine();
 
@@ -38,7 +42,7 @@ public class ConsoleWorker {
                     showCarById();
                     break;
                 default:
-                    System.out.println("unknown command");
+                    System.out.println("unknown command, try one more");
                     break;
             }
         } while (!command.equals("exit"));
@@ -50,7 +54,8 @@ public class ConsoleWorker {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < cars.size(); ++i) {
-            stringBuilder.append(carsId.get(i)).append("|").append(cars.get(i).getProvider()).append("|").append(cars.get(i).getModel()).append("\n");
+            stringBuilder.append(carsId.get(i)).append("|").append(cars.get(i).getProvider())
+                    .append("|").append(cars.get(i).getModel()).append("\n");
         }
 
         System.out.println("-------------------------");
@@ -81,7 +86,7 @@ public class ConsoleWorker {
                 String color = stringScanner.nextLine();
 
                 if (provider.equals("") || model.equals("") || bodyType.equals("") || color.equals("")) {
-                    System.out.println("one of the input fields is empty");
+                    System.out.println("one of the input fields is empty, try one more");
                     createCar();
                 }
 
@@ -207,14 +212,14 @@ public class ConsoleWorker {
     }
 
     private void changeCarFields(int id) {
-        System.out.println("command hint: 1 - edit year, 2 - edit provider, 3 - edit model, 4 - edit body-type, 5 - edit color,");
-        System.out.println("0-exit");
-        System.out.println("enter you command: ");
+        System.out.println("COMMANDS HINT: 1 - edit year, 2 - edit provider, 3 - edit model, 4 - edit body-type, 5 - edit color,");
+        System.out.println("0 - go back");
+        System.out.println("Enter you command: ");
 
         try {
             int command = intScanner.nextInt();
 
-             if (command == 1) {
+            if (command == 1) {
                 changeCarYear(id);
             } else if (command == 2) {
                 changeCarProvider(id);
@@ -224,10 +229,10 @@ public class ConsoleWorker {
                 changeCarBodyType(id);
             } else if (command == 5) {
                 changeCarColor(id);
-            } else if(command == 0) {
-                 return;
-             } else {
-                System.out.println("unknown command");
+            } else if (command == 0) {
+                return;
+            } else {
+                System.out.println("unknown command, try one more");
                 changeCarFields(id);
             }
         } catch (InputMismatchException exception) {

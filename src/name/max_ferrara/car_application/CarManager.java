@@ -37,7 +37,6 @@ public class CarManager {
                 int numberId = Integer.parseInt(id);
                 carsId.add(numberId);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,7 +54,6 @@ public class CarManager {
                         resultSet.getString("bodyType"),
                         resultSet.getString("color")));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

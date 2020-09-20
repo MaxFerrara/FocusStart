@@ -14,11 +14,10 @@ public class DataBaseWorker {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:"+ dataBasePath);
-            System.out.println("connection to data base is successful");
         } catch (SQLException exception) {
             System.out.println("data base is not found");
         } catch (ClassNotFoundException exception) {
-            System.out.println("have problem with JDBC");
+            System.out.println("check you JDBC driver");
         }
     }
 
