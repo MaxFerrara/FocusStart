@@ -13,6 +13,7 @@ public class CarApplicationMain {
 
         try {
             Scanner scanner = new Scanner(System.in);
+            System.out.println("enter you path to database: ");
             String path = scanner.nextLine();
 
             DataBaseWorker dataBaseWorker = new DataBaseWorker(path);
